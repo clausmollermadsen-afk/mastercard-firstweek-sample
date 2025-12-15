@@ -2,6 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Master.Firstweek.Client.Model;
 
+#pragma warning disable CS8618
+
 public class CreateAcceptPaymentOutput
 {
     /// <summary>
@@ -19,5 +21,6 @@ public class CreateAcceptPaymentOutput
     /* <example>472e651e-5a1e-424d-8098-23858bf03ad7</example> */
     [JsonPropertyName("paymentId")]
     public Guid PaymentId { get; set; }
-    
 }
+
+#pragma warning restore CS8618

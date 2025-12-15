@@ -2,26 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Master.Firstweek.Client.Model;
 
-#pragma warning disable CS8618
-
-public class UkFasterPaymentsPaymentAddressInput
+public class PaymentAddress
 {
-    /// <summary>
-    ///     Name of the city.
-    /// </summary>
-    /// <value>Name of the city.</value>
-    /* <example>London</example> */
-    [JsonPropertyName("city")]
-    public string City { get; set; }
-
-    /// <summary>
-    ///     ISO Country Code.
-    /// </summary>
-    /// <value>ISO Country Code.</value>
-    /* <example>GB</example> */
-    [JsonPropertyName("country")]
-    public string Country { get; set; }
-
     /// <summary>
     ///     The address specified in free text lines.
     /// </summary>
@@ -54,12 +36,26 @@ public class UkFasterPaymentsPaymentAddressInput
     public string? PostalCode { get; set; }
 
     /// <summary>
+    ///     Name of the city.
+    /// </summary>
+    /// <value>Name of the city.</value>
+    /* <example>London</example> */
+    [JsonPropertyName("city")]
+    public string? City { get; set; }
+
+    /// <summary>
     ///     The Country Subdivision, i.e. State or County.
     /// </summary>
     /// <value>The Country Subdivision, i.e. State or County.</value>
     /* <example>Greater London</example> */
     [JsonPropertyName("countrySubDivision")]
     public string? CountrySubDivision { get; set; }
-}
 
-#pragma warning restore CS8618
+    /// <summary>
+    ///     ISO Country Code.
+    /// </summary>
+    /// <value>ISO Country Code.</value>
+    /* <example>GB</example> */
+    [JsonPropertyName("country")]
+    public string? Country { get; set; }
+}

@@ -1,13 +1,15 @@
 @page "/Bill"
-
-@using Microsoft.AspNetCore.Authorization
 @using Master.Firstweek.WebApp.Data
 @using Master.Firstweek.WebApp.Service
+@using Microsoft.AspNetCore.Authorization
+
 @rendermode InteractiveServer
+
 @inject AuthenticationStateProvider AuthProvider
 @inject NavigationManager Nav
 @inject CurrentUser CurrentUser
 @inject BillService BillService
+
 @attribute [Authorize] 
 
 <h1>Regninger</h1>
@@ -26,36 +28,32 @@
     <tbody>
     <tr>
         <td>
-            @_user.Address
+            @_user?.Address
         </td>
         <td>
-            @_user.Email
+            @_user?.Email
         </td>
         <td>
-            @_user.Active
+            @_user?.Active
         </td>
     </tr>
     </tbody>
 </table>
 
- 
-<h3>Regninger</h3>
-<table class="table custom-table">
-    <thead>
-    <tr>
-        <th>Fra</th>
-        <th>Til</th>
-        <th>Beløb</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var bill in _bills)
-    {
+@foreach (var bill in _bills ?? [])
+{
+    <table class="table custom-table">
+        <thead>
+        <tr>
+            <th>Fra</th>
+            <th>Til</th>
+            <th>Beløb</th>
+        </tr>
+        </thead>
+        <tbody>
         <tr>
             <td>@bill.FromDate.Date</td>
-
             <td>@bill.ToDate.Date</td>
-
             <td>@bill.Amount</td>
             <td>
                 <NavLink href="@($"/addpayment/{@bill.Id}")" class="nav-link" activeClass="active">
@@ -63,13 +61,37 @@
                 </NavLink>
             </td>
         </tr>
-    }
-    </tbody>
-</table>
+        <tr>
+            <td colspan="4">
+                <b>Betalinger:</b>
+                <table class="table custom-table">
+                    <thead>
+                    <tr>
+                        <th>Betaler</th>
+                        <th>Url</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var payment in bill.Payments)
+                    {
+                        <tr>
+                            <td>@payment.Name</td>
+                            <td><a href="@payment.FlowUrl">Klik for at betale</a></td>
+                            <td>@payment.Status</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
 @code {
     private ApplicationUser? _user;
-    private List<Bill> _bills;
-
+    private IEnumerable<Bill>? _bills;
 
     protected override async Task OnInitializedAsync()
     {

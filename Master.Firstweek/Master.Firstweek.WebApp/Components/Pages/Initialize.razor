@@ -1,7 +1,7 @@
 @page "/Initialize"
-@rendermode InteractiveServer
 @using Master.Firstweek.WebApp.Data
 @using Master.Firstweek.WebApp.Service
+@rendermode InteractiveServer
 
 @inject UserService UserService
 @inject BillService BillService
@@ -15,12 +15,10 @@
 
 <table class="table custom-table">
 <tbody>
-    @foreach (var user in _users)
-    {
-        
-        <tr>
-            
-            <td>
+@foreach (var user in _users ?? [])
+{
+    <tr>
+        <td>
                 @user.Address
             </td>
             <td>
@@ -37,41 +35,37 @@
                 </button>
             </td>
         </tr>
-
-        }
+}
         </tbody>
 </table>
 
 @code {
+    string? _result;
+    private List<ApplicationUser>? _users;
 
-    string _result; 
-   private List<ApplicationUser> _users;
-   
-
-    public void AddUsers()
+    private async Task AddUsers()
     {
-        UserService.AddTestUsers();
-        _result = "Users added";    
-        _users = UserService.GetUsers();
+        await UserService.AddTestUsersAsync();
+        _result = "Users added";
+        _users = await UserService.GetUsersAsync();
         StateHasChanged();
     }
 
-    public async Task AddBills()
+    private async Task AddBills()
     {
         await BillService.AddBills();
         _result = "Bills added";
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
-        // Load from database asynchronously
-        _users = UserService.GetUsers();
+        _users = await UserService.GetUsersAsync();
     }
 
-    protected async Task ToggleActive(ApplicationUser user)
+    private async Task ToggleActive(ApplicationUser user)
     {
         user.Active = !user.Active;
         await UserService.UpdateUserAsync(user);
-        _users = UserService.GetUsers();
+        _users = await UserService.GetUsersAsync();
     }
 }

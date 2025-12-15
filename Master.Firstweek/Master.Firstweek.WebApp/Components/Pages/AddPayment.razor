@@ -1,17 +1,36 @@
 @page "/AddPayment/{BillId:long}"
+@using Microsoft.AspNetCore.Authorization
+
+@rendermode InteractiveServer
+
+@attribute [Authorize]
 
 <h3>Tilføj betaling</h3>
 
-<table>
-    
-<thead></thead>
-<tbody>
-<tr>
-    <td>Amount</td>
-    <td>@Bill?.Amount</td>
-</tr>
-</tbody>
+<table class="table custom-table">
+    <thead></thead>
+    <tbody>
+    <tr>
+        <td>Amount</td>
+        <td>@Bill?.Amount</td>
+    </tr>
+    <tr>
+        <td>Cpr number</td>
+        <td>
+            <InputText @bind-Value="_cprNumber" class="form-control"/>
+        </td>
+    </tr>
+    <tr>
+        <td>Name</td>
+        <td>
+            <InputText @bind-Value="_name" class="form-control"/>
+        </td>
+    </tr>
+    </tbody>
 </table>
+
+<button class="btn btn-primary" @onclick="AddPaymentAsync">Tilføj betaling</button>
+
 @code {
     [Parameter]
     public long BillId { get; set; }

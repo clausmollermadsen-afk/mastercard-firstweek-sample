@@ -2,6 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Master.Firstweek.Client.Model;
 
+#pragma warning disable CS8618
+
 public class BbanAccountNumberInput
 {
     /// <summary>
@@ -25,3 +27,5 @@ public class BbanAccountNumberInput
     [JsonPropertyName("accountName")]
     public string? AccountName { get; set; }
 }
+
+#pragma warning restore CS8618
