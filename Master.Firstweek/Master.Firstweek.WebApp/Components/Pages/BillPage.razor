@@ -48,12 +48,13 @@
             <th>Fra</th>
             <th>Til</th>
             <th>Beløb</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>@bill.FromDate.Date</td>
-            <td>@bill.ToDate.Date</td>
+            <td>@bill.FromDate.Date.ToString("yyyy-MM-dd")</td>
+            <td>@bill.ToDate.Date.ToString("yyyy-MN-dd")</td>
             <td>@bill.Amount</td>
             <td>
                 <NavLink href="@($"/addpayment/{@bill.Id}")" class="nav-link" activeClass="active">
@@ -73,7 +74,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var payment in bill.Payments)
+                    @foreach (var payment in bill.Payments ?? [])
                     {
                         <tr>
                             <td>@payment.Name</td>

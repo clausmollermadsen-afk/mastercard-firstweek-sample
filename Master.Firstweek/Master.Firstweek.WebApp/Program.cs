@@ -61,7 +61,7 @@ namespace Master.Firstweek.WebApp
 
             // Use a configuration-based connection string in production
             var connectionString =
-                "DataSource=//Users/e185253/RiderProjects/mastercard-firstweek/Master.Firstweek/Master.Firstweek.WebApp/App.db;Cache=Shared";
+                "DataSource=//Users/e185253/tmp/App.db;Cache=Shared";
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();

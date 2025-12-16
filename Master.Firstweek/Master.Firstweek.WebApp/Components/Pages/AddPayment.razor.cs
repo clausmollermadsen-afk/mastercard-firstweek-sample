@@ -28,7 +28,7 @@ public partial class AddPayment : ComponentBase
         if (Bill != null && _cprNumber != null && _name != null)
         {
             await PaymentService.AddPaymentAsync(BillId, _cprNumber, _name);
-            NavigationManager.NavigateTo($"/Bill/{BillId}");
+            NavigationManager.NavigateTo("/Bill");
         }
     }
 }
