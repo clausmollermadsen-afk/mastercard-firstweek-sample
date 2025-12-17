@@ -1,4 +1,3 @@
-using Master.Firstweek.WebApp.Data;
 using Master.Firstweek.WebApp.Service;
 using Microsoft.AspNetCore.Components;
 
@@ -16,7 +15,7 @@ public partial class AddPayment : ComponentBase
 
     [Inject] public required NavigationManager NavigationManager { get; set; }
 
-    private Bill? Bill { get; set; }
+    private Data.Bill? Bill { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

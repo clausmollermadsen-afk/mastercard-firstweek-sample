@@ -16,9 +16,7 @@
 
 <h3>Medlem</h3>
 <table class="table custom-table">
-
     <thead>
-    
     <tr>
         <th>Addresse</th>
         <th>Email</th>
@@ -54,7 +52,7 @@
         <tbody>
         <tr>
             <td>@bill.FromDate.Date.ToString("yyyy-MM-dd")</td>
-            <td>@bill.ToDate.Date.ToString("yyyy-MN-dd")</td>
+            <td>@bill.ToDate.Date.ToString("yyyy-MM-dd")</td>
             <td>@bill.Amount</td>
             <td>
                 <NavLink href="@($"/addpayment/{@bill.Id}")" class="nav-link" activeClass="active">
@@ -92,7 +90,7 @@
 
 @code {
     private ApplicationUser? _user;
-    private IEnumerable<Bill>? _bills;
+    private IEnumerable<Data.Bill>? _bills;
 
     protected override async Task OnInitializedAsync()
     {

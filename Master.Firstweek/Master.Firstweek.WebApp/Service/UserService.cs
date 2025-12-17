@@ -52,7 +52,10 @@ public class UserService
     /// <returns>A list of all application users.</returns>
     public async Task<List<ApplicationUser>> GetUsersAsync()
     {
-        return await _context.Users.ToListAsync();
+        return await _context
+            .Users
+            .OrderBy(user => user.Address)
+            .ToListAsync();
     }
 
     /// <summary>

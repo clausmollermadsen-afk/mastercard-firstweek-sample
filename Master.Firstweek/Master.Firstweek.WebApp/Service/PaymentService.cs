@@ -52,7 +52,7 @@ public class PaymentService
             {
                 PaymentRail = "DanishDomesticCreditTransferInstant",
                 DestinationId = _openBankingConfiguration.DestinationId,
-                RedirectUrl = "https://httpbin.org/anything",
+                RedirectUrl = "http://localhost:5239/Bill",
                 ClientAssignedReference = "Example client assigned reference",
                 Language = "en-US",
                 ThemeId = "ThemeId",

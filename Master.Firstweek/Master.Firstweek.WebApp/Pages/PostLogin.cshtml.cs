@@ -7,7 +7,6 @@ public class PostLogin : PageModel
 {
     public async Task<IActionResult> OnGet()
     {
-        await HttpContext.Response.CompleteAsync();
-        return LocalRedirect("/_Host");
+        return LocalRedirect("/Bill");
     }
 }

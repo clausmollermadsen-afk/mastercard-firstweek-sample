@@ -7,27 +7,24 @@ namespace Master.Firstweek.WebApp.Pages;
 
 public class Login : PageModel
 {
+    private readonly CustomAuthStateProvider _authProvider;
 
     public Login(AuthenticationStateProvider authStateProvider)
     {
         _authProvider = (CustomAuthStateProvider)authStateProvider;
     }
-    
-    private readonly CustomAuthStateProvider _authProvider;
 
-    [BindProperty(SupportsGet = true)]
-    public Guid Token { get; set; }
+    [BindProperty(SupportsGet = true)] public Guid Token { get; set; }
 
     public async Task<IActionResult> OnGet(string returnUrl = "/")
     {
         if (await _authProvider.SignIn(Token.ToString()))
         {
             // Tell Blazor to refresh its AuthenticationState
-            _authProvider.NotifyUserChanged(); 
-            
-            LocalRedirect("/PostLogin");
+            _authProvider.NotifyUserChanged();
+            return LocalRedirect("/PostLogin");
         }
 
-        return Redirect("/NoAccess");
+        return LocalRedirect("/NoAccess");
     }
 }
